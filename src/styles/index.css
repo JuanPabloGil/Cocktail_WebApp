@@ -25,3 +25,41 @@ code {
     'Courier New',
     monospace;
 }
+
+.App {
+  background-color: #F8F8F8;
+}
+
+
+.Drink-Container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.Drink-Container-Title {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  color: white;
+  border-bottom: 2px solid red;
+}
+
+.Drink-Container-Category {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  color: white;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+.Drink-Container  img {
+  filter: brightness(50%);
+  border-radius: 3px;
+}
+
+.Drink-Container  img:hover {
+  filter: brightness(100%);
+  border-radius: 3px;
+}

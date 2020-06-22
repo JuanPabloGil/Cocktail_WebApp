@@ -6,12 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   const drinks = useSelector(state => state.drinks);
-  const abc = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  const abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'Z'];
 
   const dispatch = useDispatch();
 
-  const handleSelectChar = () => {
-
+  const handleSelectChar = e => {
+    dispatch(loadDrinks(e));
   };
 
   return (
@@ -20,21 +20,21 @@ const App = () => {
 
         <h1>Amazing drinks </h1>
         {abc.map(letter => (
-          <button type="button" key={letter} onClick={handleSelectChar} className=" btn btn-danger m-1">
+          <button type="button" key={letter} onClick={() => handleSelectChar({ letter })} className=" btn btn-danger m-1">
             {' '}
             {letter}
             {' '}
           </button>
-        )) }
+        ))}
 
         <br />
 
         <span>Filter by:</span>
-        <button className=" btn btn-danger m-1">All</button>
-        <button className=" btn btn-danger m-1">Ordinary Drink</button>
-        <button className=" btn btn-danger m-1">Cocktail</button>
-        <button className=" btn btn-danger m-1">Shot</button>
-        <button className=" btn btn-danger m-1">Others</button>
+        <button type="button" className=" btn btn-danger m-1">All</button>
+        <button type="button" className=" btn btn-danger m-1">Ordinary Drink</button>
+        <button type="button" className=" btn btn-danger m-1">Cocktail</button>
+        <button type="button" className=" btn btn-danger m-1">Shot</button>
+        <button type="button" className=" btn btn-danger m-1">Others</button>
 
         <div className="row">
           {drinks.map(drink => <Drinks key={drink.idDrink} data={drink} />)}
@@ -47,7 +47,7 @@ const App = () => {
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-  loadDrinks: dispatch(loadDrinks),
+  loadDrinks: dispatch(loadDrinks('a')),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -41,7 +41,7 @@ const Drink = data => {
         </div>
         <Link to="/">
           {' '}
-          <button className="btn btn-danger mt-4">{' < Go Home'}</button>
+          <button type="button" className="btn btn-danger mt-4">{' < Go Home'}</button>
         </Link>
       </div>
     </div>

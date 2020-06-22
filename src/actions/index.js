@@ -9,11 +9,9 @@ export function getDrinks(data) {
   };
 }
 
-export const loadDrinks = (dispatch, char) => {
-  const letter = 'b';
-  axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter || char}`)
+export const loadDrinks = char => async dispatch => {
+  axios.get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${char.letter || 'a'}`)
     .then(response => {
       dispatch(getDrinks(response.data.drinks));
-      console.log('here');
     });
 };

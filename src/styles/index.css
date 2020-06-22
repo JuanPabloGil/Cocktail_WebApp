@@ -27,9 +27,8 @@ code {
 }
 
 .App {
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
 }
-
 
 .Drink-Container {
   position: relative;
@@ -54,12 +53,12 @@ code {
   font-weight: bold;
 }
 
-.Drink-Container  img {
+.Drink-Container img {
   filter: brightness(50%);
   border-radius: 3px;
 }
 
-.Drink-Container  img:hover {
+.Drink-Container img:hover {
   filter: brightness(100%);
   border-radius: 3px;
 }

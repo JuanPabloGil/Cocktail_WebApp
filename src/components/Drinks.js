@@ -23,7 +23,6 @@ const Drinks = drinks => {
           {' '}
           {strCategory}
           {' '}
-&nbsp;
         </span>
       </div>
     </div>

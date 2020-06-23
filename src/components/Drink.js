@@ -10,11 +10,17 @@ const Drink = data => {
     strInstructions,
     strAlcoholic,
     strGlass,
-    strIngredient1,
-    strIngredient2,
-    strIngredient3,
-    strIngredient4,
   } = data.location.state.data;
+
+  const ingredients = [];
+  const measures = [];
+
+  for (let i = 1; i < 16; i += 1) {
+    if (data.location.state.data[`strIngredient${i}`] !== null) {
+      ingredients.push(data.location.state.data[`strIngredient${i}`]);
+      measures.push(data.location.state.data[`strMeasure${i}`]); // add
+    }
+  }
 
   return (
     <div className="container mt-5">
@@ -27,14 +33,26 @@ const Drink = data => {
           <h1>{strDrink}</h1>
           <span className="bg-danger text-white p-2 rounded ">{strCategory}</span>
           <hr className="mt-5" />
-          <h4>Ingredients</h4>
-          <ul>
-            <li>{strIngredient1}</li>
-            <li>{strIngredient2}</li>
-            {strIngredient3 === null ? '' : <li>{strIngredient3}</li>}
-            {strIngredient4 === null ? '' : <li>{strIngredient4}</li>}
-          </ul>
-          <hr className="mt-5" />
+          <div className="row">
+            <div className="col-sm-6">
+              <h4>Ingredients</h4>
+              <ul>
+                {
+                  ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)
+                }
+              </ul>
+            </div>
+            <div className="col-sm-6">
+              <h4>Measures</h4>
+              <ul>
+                {
+                  measures.map(mesure => <li key={mesure}>{mesure}</li>)
+                }
+              </ul>
+            </div>
+          </div>
+
+          <hr className="mt-4" />
           <h4>{strGlass}</h4>
           <p>{strInstructions}</p>
           <span className="bg-danger text-white p-1">{strAlcoholic === 'Alcoholic' ? '+18' : 'Family'}</span>

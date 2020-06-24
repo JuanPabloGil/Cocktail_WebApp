@@ -5,7 +5,7 @@ const ListOfDrinks = [];
 const drinks = (state = ListOfDrinks, action) => {
   switch (action.type) {
     case FETCH_DRINKS:
-      return action.payload;
+      return action.payload
     default:
       return state;
   }

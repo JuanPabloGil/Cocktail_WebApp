@@ -5,7 +5,7 @@ const ListOfDrinks = [];
 const filter = (state = ListOfDrinks, action) => {
   switch (action.type) {
     case ORDER_DRINKS_BY:
-      return action.payload;
+      return action.payload
     default:
       return state;
   }

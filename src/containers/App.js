@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import { useSelector, useDispatch, connect } from 'react-redux';
-import { loadDrinks, sortDrinks } from '../actions';
+import { loadDrinks, sortDrinks, getDrinks, returnFilteredDrinks } from '../actions';
 import Drinks from '../components/Drinks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
-  const drinks = useSelector(state => state.drinks);
-  const filters = useSelector(state => state.filter);
+
 
   const abc = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'Z'];
+
+  const drinks = useSelector(state => state.drinks);
+  const filters = useSelector(state => state.filter);
+  let letter = 'a'
 
   const dispatch = useDispatch();
 
   const handleSelectChar = e => {
-    dispatch(loadDrinks(e));
+    dispatch(loadDrinks(e))
   };
 
   const handleFilter = (e, category) => {
     dispatch(sortDrinks(e, category));
   };
+
+  useEffect(() => {
+    dispatch(loadDrinks('a'))
+  }, []);
 
   const displayDrinks = () => {
     let render;
@@ -33,22 +41,17 @@ const App = () => {
   return (
     <div className="App">
       <div className="container">
-
         <h1 className="text-center">Find an Amazing drink </h1>
-
         <hr />
-
         {
           abc.map(letter => (
-            <button type="button" key={letter} onClick={() => handleSelectChar({ letter })} className=" btn btn-danger m-1">
+            <button type="button" key={letter} onClick={() => handleSelectChar({letter})} className=" btn btn-danger m-1">
               {letter}
             </button>
           ))
         }
-
         <br />
         <hr />
-
         <span>Filter by:</span>
         <button type="button" onClick={() => handleFilter(drinks, 'All')} className=" btn btn-danger m-1">All</button>
         <button type="button" onClick={() => handleFilter(drinks, 'Ordinary Drink')} className=" btn btn-danger m-1">Ordinary Drink</button>
@@ -64,10 +67,5 @@ const App = () => {
   );
 };
 
-const mapStateToProps = state => state;
 
-const mapDispatchToProps = dispatch => ({
-  loadDrinks: dispatch(loadDrinks('a')),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App

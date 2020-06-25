@@ -1,7 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Drink = data => {
+const Drink = props => {
+  const {
+    location,
+  } = props;
+
+  const {
+    state,
+  } = location;
+
+  const {
+    data,
+  } = state;
+
   const {
     idDrink,
     strDrink,
@@ -10,15 +22,15 @@ const Drink = data => {
     strInstructions,
     strAlcoholic,
     strGlass,
-  } = data.location.state.data;
+  } = data;
 
   const ingredients = [];
   const measures = [];
 
   for (let i = 1; i < 16; i += 1) {
-    if (data.location.state.data[`strIngredient${i}`] !== null) {
-      ingredients.push(data.location.state.data[`strIngredient${i}`]);
-      measures.push(data.location.state.data[`strMeasure${i}`]); // add
+    if (data[`strIngredient${i}`] !== null) {
+      ingredients.push(data[`strIngredient${i}`]);
+      measures.push(data[`strMeasure${i}`]);
     }
   }
 
@@ -38,7 +50,7 @@ const Drink = data => {
               <h4>Ingredients</h4>
               <ul>
                 {
-                  ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)
+                  ingredients.map((ingredient, index) => <li key={`${index + ingredient}`}>{ingredient}</li>)
                 }
               </ul>
             </div>
@@ -46,7 +58,7 @@ const Drink = data => {
               <h4>Measures</h4>
               <ul>
                 {
-                  measures.map(mesure => <li key={mesure}>{mesure}</li>)
+                  measures.map((mesure, index) => <li key={`${index + mesure}`}>{mesure}</li>)
                 }
               </ul>
             </div>
@@ -57,13 +69,30 @@ const Drink = data => {
           <p>{strInstructions}</p>
           <span className="bg-danger text-white p-1">{strAlcoholic === 'Alcoholic' ? '+18' : 'Family'}</span>
         </div>
-        <Link to="/">
-          {' '}
+
+        <a href="/">
           <button type="button" className="btn btn-danger mt-4">{' < Go Home'}</button>
-        </Link>
+        </a>
+
       </div>
     </div>
   );
+};
+
+Drink.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: PropTypes.shape({
+        idDrink: PropTypes.string,
+        strDrink: PropTypes.string,
+        strCategory: PropTypes.string,
+        strDrinkThumb: PropTypes.string,
+        strInstructions: PropTypes.string,
+        strAlcoholic: PropTypes.string,
+        strGlass: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
 };
 
 export default Drink;
